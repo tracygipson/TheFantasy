@@ -7,20 +7,32 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
+import org.json.JSONException;
+import java.io.IOException;
 
 public abstract class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    /*private TextView mTextMessage;*/
     public ImageView imageView;
-    public String url="https://farm9.staticflickr.com/8732/17129320792_fb10e27efa_b.jpg";
+    public GridView griddy;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        imageView = (ImageView) findViewById(R.id.tracy);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
     {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -33,8 +45,7 @@ public abstract class MainActivity extends AppCompatActivity {
                         Picasso.with(getApplicationContext()).load("https://i.pinimg.com/736x/64/d3/c4/64d3c4bbd6d9d6f290ac9a7aeaf50800.jpg").into(imageView);
                         return true;
                     case R.id.navigation_notifications:
-                        /*mTextMessage.setText(R.string.title_notifications);*/
-                        showimages();
+                        somefn();
                         return true;
                 }
                 return false;
@@ -42,22 +53,14 @@ public abstract class MainActivity extends AppCompatActivity {
         };
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        imageView = (ImageView) findViewById(R.id.tracy);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    public void somefn(){
+        try {
+            griddy.setAdapter(new GridViewAdapter(getApplicationContext()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-
-    public void showimages(){
-        Picasso.with(getApplicationContext())
-                .load(url)
-                .into(imageView);
-    }
-
-    public abstract View view();
+   /* public abstract View view();*/
 }
