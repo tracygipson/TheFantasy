@@ -22,5 +22,11 @@
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:id="@+id/btn"/>
 
 </RelativeLayout>
