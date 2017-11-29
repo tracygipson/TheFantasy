@@ -55,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         /*mTextMessage.setText(R.string.title_home);*/
-                        btn.setVisibility(View.INVISIBLE);
+                        btn.setVisibility(View.GONE);
                         Picasso.with(getApplicationContext()).load("https://i.pinimg.com/736x/64/d3/c4/64d3c4bbd6d9d6f290ac9a7aeaf50800.jpg ").into(imageView);
                         return true;
                     case R.id.navigation_dashboard:
                        /* mTextMessage.setText(R.string.title_dashboard);*/
-                        btn.setVisibility(View.INVISIBLE);
+                        btn.setVisibility(View.GONE);
                         Picasso.with(getApplicationContext()).load("https://i.pinimg.com/736x/64/d3/c4/64d3c4bbd6d9d6f290ac9a7aeaf50800.jpg").into(imageView);
                         return true;
                     case R.id.navigation_notifications:
-                        btn.setVisibility(View.VISIBLE);
+                        /*btn.setVisibility(View.VISIBLE);*/
                         /*somefn();*/
 
                         return true;

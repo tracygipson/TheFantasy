@@ -1,5 +1,6 @@
 package com.thefantasy.tracy.thefantasy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,54 +11,39 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
-import java.security.PublicKey;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
+import java.util.ArrayList;
 
 /**
  * Created by tracy on 25/11/2017.
  */
 
-public class GridViewAdapter extends ArrayAdapter
-{
-        private Context context;
-        private LayoutInflater inflater;
-        private String[] imagesArray;
+public class GridViewAdapter extends ArrayAdapter {
+    private Context context;
+   /* private LayoutInflater inflater;*/
+    private String[] imagesurls;
+    /*ArrayList<images> imagesurls;*/
+    public ImageView imgy;
 
-        public GridViewAdapter(Context context, String[] imagesArray) throws IOException, JSONException {
-            super(context, R.layout.activity_main2);
-            this.context = context;
-            this.imagesArray = imagesArray;
-            /*getimagesurls();*/
-            inflater = LayoutInflater.from(context);
+    public GridViewAdapter(Context context, String[] imagesArray) {
+        super(context, R.layout.activity_main2, imagesArray);
+        this.context = context;
+        this.imagesurls = imagesArray;
+        System.out.println(imagesurls[3]);
+
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (null == convertView) {
+           LayoutInflater inflater = (LayoutInflater)getContext()
+            .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                   convertView = inflater.inflate(R.layout.activity_main2, null, true);
         }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (null == convertView) {
-                convertView = inflater.inflate(R.layout.activity_main2, parent, false);
-            }
-            Picasso.with(context)
-                    .load(imagesArray[position])
-                    .fit()
-                    .into((ImageView) convertView);
-            return convertView;
-        }
-      /*  public void getimagesurls() throws IOException, JSONException {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Response response = client.newCall(request).execute();
-            String data = response.body().string();
-
-            jobj = new JSONObject(data);
-            jary = jobj.optJSONArray("tracy");
-            for (int i =0;i<jary.length();i++) imagesArray[i] = jary.getString(i);
-        }*/
+        imgy = (ImageView) convertView.findViewById(R.id.img);
+        Picasso.with(context)
+                .load(imagesurls[position])
+                .into(imgy);
+        return convertView;
+    }
 }
